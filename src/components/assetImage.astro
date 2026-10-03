@@ -1,0 +1,23 @@
+---
+import { Image } from "astro:assets";
+const { src, alt, className } = Astro.props;
+
+const images = import.meta.glob("/src/assets/**/*.{jpeg,jpg,png,gif,webp}", {
+  eager: true,
+});
+console.log(images, src);
+console.log(Astro.props);
+const imageObj = images[src] as any;
+console.log(src && imageObj ? true : false);
+console.log(imageObj);
+---
+
+<>
+  {
+    src && imageObj ? (
+      <Image src={imageObj.default} alt={alt} class={className} />
+    ) : (
+      <img src="" alt={alt} class={className} />
+    )
+  }
+</>

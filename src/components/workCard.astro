@@ -1,4 +1,5 @@
 ---
+import AssetImage from "./assetImage.astro";
 const { url, thumbnail, opus, title, year, instrumentation } = Astro.props;
 ---
 
@@ -6,9 +7,10 @@ const { url, thumbnail, opus, title, year, instrumentation } = Astro.props;
   .work-card {
     min-width: 0;
   }
-  .work-card-jacket {
+  :global(.work-card-jacket) {
     display: block;
     width: 100%;
+    height: auto;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     margin-bottom: 20px;
@@ -58,7 +60,7 @@ const { url, thumbnail, opus, title, year, instrumentation } = Astro.props;
   }
 
   @media (max-width: 700px) {
-    .work-card-jacket {
+    :global(.work-card-jacket) {
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     }
 
@@ -86,11 +88,11 @@ const { url, thumbnail, opus, title, year, instrumentation } = Astro.props;
     text-decoration: none;
   }
 
-  .work-card-jacket-link img {
+  .work-card-jacket-link {
     transition: opacity 0.2s ease;
   }
 
-  .work-card-jacket-link:hover img {
+  .work-card-jacket-link:hover {
     opacity: 0.85;
   }
 
@@ -102,7 +104,7 @@ const { url, thumbnail, opus, title, year, instrumentation } = Astro.props;
 
 <div class="work-card">
   <a href={url} class="work-card-jacket-link">
-    <img src={thumbnail} alt={title} class="work-card-jacket" />
+    <AssetImage src={thumbnail} alt={title} className="work-card-jacket" />
   </a>
 
   <div class="work-card-info">

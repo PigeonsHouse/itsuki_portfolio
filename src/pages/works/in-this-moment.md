@@ -6,7 +6,7 @@ title: Piano Suite "In This Moment"
 opus: Op.4
 year: 2026
 instrumentation: Piano
-thumbnail: /images/works/4.jpg
+thumbnail: /src/assets/images/works/4.jpg
 ---
 
 昨日まで確かにそこにあった景色も、そのとき抱いていた感情も、気がつけば遠い記憶になっている。

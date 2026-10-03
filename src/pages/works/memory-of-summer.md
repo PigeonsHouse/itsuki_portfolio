@@ -6,7 +6,7 @@ title: Suite "Memory of Summer"
 opus: Op.2
 year: 2021
 instrumentation: Orchestra
-thumbnail: /images/works/2.jpg
+thumbnail: /src/assets/images/works/2.jpg
 links:
     youtube: https://youtu.be/uvobKui6g1o?si=EuZVA3v675QzN0Vm
     linkcore: https://linkco.re/P6srcTS2

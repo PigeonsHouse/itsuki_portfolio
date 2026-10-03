@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "./base.astro";
+import AssetImage from "../components/assetImage.astro";
 
 const {
   frontmatter: { title, opus, year, instrumentation, thumbnail, links },
@@ -55,10 +57,11 @@ const {
     width: 100%;
   }
 
-  .work-jacket img {
+  .work-jacket :global(img) {
     display: block;
 
     width: 100%;
+    height: auto;
     aspect-ratio: 1 / 1;
 
     object-fit: cover;
@@ -241,7 +244,7 @@ const {
     <article id="work-page">
       <div class="work-main">
         <div class="work-jacket">
-          <img src={thumbnail} alt={title} />
+          <AssetImage src={thumbnail} alt={title} />
         </div>
 
         <div class="work-info">
