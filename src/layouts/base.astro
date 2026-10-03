@@ -1,0 +1,18 @@
+---
+const SITE_NAME = "Itsuki Uchida";
+const { title } = Astro.props;
+const wholeTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{wholeTitle}</title>
+  </head>
+
+  <body>
+    <slot />
+  </body>
+</html>

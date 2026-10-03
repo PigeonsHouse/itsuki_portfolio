@@ -1,17 +1,23 @@
 ---
+import BaseLayout from "../layouts/base.astro";
 
+const works: any[] = Object.values(
+  import.meta.glob("./works/*.md", {
+    eager: true,
+  }),
+);
+const sortedWorks = works.sort((a, b) => a.frontmatter.id - b.frontmatter.id);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Works">
+  <section class="works-section">
+    <h2>Works</h2>
+    {
+      sortedWorks.map((post) => (
+        <div>
+          <a href={post.url}>{post.frontmatter.title}</a>
+        </div>
+      ))
+    }
+  </section>
+</BaseLayout>
