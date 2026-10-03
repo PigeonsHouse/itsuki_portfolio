@@ -1,30 +1,296 @@
 ---
 import BaseLayout from "./base.astro";
 
-const { frontmatter: {title, opus, year, instrumentation, thumbnail, links} } = Astro.props;
+const {
+  frontmatter: { title, opus, year, instrumentation, thumbnail, links },
+} = Astro.props;
 ---
 
 <style>
-  .thumbnail {
-    width: 360px;
-    height: 360px;
+  body {
+    background: #f8f7f4;
+  }
+  main {
+    width: min(1200px, calc(100% - 80px));
+    padding: 60px 0 140px;
+  }
+  .work-header {
+    margin-bottom: 70px;
+
+    border-bottom: 1px solid #dddcd8;
+    padding-bottom: 20px;
+  }
+
+  .back-link {
+    color: #777;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-decoration: underline;
+  }
+
+  .back-link:hover {
+    color: #222;
+  }
+
+  .header-title {
+    color: #777;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+
+    text-decoration: none;
+  }
+  .work-main {
+    display: grid;
+
+    grid-template-columns: 360px 1fr;
+    gap: 90px;
+
+    align-items: center;
+  }
+  .work-jacket {
+    width: 100%;
+  }
+
+  .work-jacket img {
+    display: block;
+
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+    margin-left: 20px;
+  }
+  .work-info {
+    padding-bottom: 10px;
+  }
+
+  .work-opus {
+    margin: 0 0 16px;
+    color: #777;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+  }
+
+  .work-title {
+    margin: 0 0 22px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+  }
+
+  .work-meta {
+    margin: 0;
+    color: #777;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .work-meta span {
+    margin: 0 8px;
+  }
+
+  .program-note {
+    width: min(1000px, 100%);
+    margin: 130px auto 0;
+  }
+
+  .program-note h2,
+  .work-links h2 {
+    margin: 0 0 35px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+
+    border-bottom: 1px solid #dddcd8;
+    padding-bottom: 14px;
+  }
+
+  .program-note-content {
+    color: #444;
+
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+  .program-note-content :global(p) {
+    margin: 0 0 1em;
+  }
+  .program-note-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+  .program-note-content :global(h3) {
+    margin-top: 40px;
+  }
+
+  .work-info .work-links-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    margin-top: 35px;
+  }
+
+  .work-info .work-links-list a {
+    display: inline-block;
+
+    min-width: 140px;
+    padding: 12px 22px;
+
+    border: 1px solid #cfcfca;
+
+    color: #444;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+
+    text-align: center;
+    text-decoration: none;
+
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .work-info .work-links-list a:hover {
+    background: #222;
+    border-color: #222;
+    color: #fff;
+  }
+
+  @media (max-width: 800px) {
+    main {
+      width: calc(100% - 40px);
+      padding: 40px 0 100px;
+    }
+
+    .work-header {
+      margin-bottom: 50px;
+    }
+
+    .work-main {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .work-jacket {
+      width: min(420px, 100%);
+      margin: 0 auto;
+    }
+
+    .work-info {
+      text-align: center;
+    }
+
+    .work-title {
+      font-size: 2.3rem;
+    }
+
+    .program-note {
+      margin-top: 90px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    main {
+      width: calc(100% - 30px);
+      padding-top: 30px;
+    }
+
+    .work-header {
+      margin-bottom: 40px;
+    }
+
+    .work-title {
+      font-size: 1.9rem;
+    }
+
+    .program-note-content {
+      font-size: 0.9rem;
+      line-height: 2;
+    }
+
+    .work-links-list {
+      flex-direction: column;
+    }
+
+    .work-links-list a {
+      width: 100%;
+    }
   }
 </style>
 
 <BaseLayout title={title}>
-  <div><a href="/">TOP</a></div>
+  <main>
+    <header class="work-header">
+      <a href="../index.html" class="back-link">Works</a>
+      <a class="header-title"> - {opus} {title}</a>
+    </header>
+    <article id="work-page">
+      <div class="work-main">
+        <div class="work-jacket">
+          <img src={thumbnail} alt={title} />
+        </div>
 
-  <img class="thumbnail" src={thumbnail} />
+        <div class="work-info">
+          <p class="work-opus">
+            {opus}
+          </p>
 
-  <div>{opus}</div>
-  <h1>{title}</h1>
-  <div>{year}・{instrumentation}</div>
+          <h1 class="work-title">
+            {title}
+          </h1>
 
-  {links && (
-    <div>{links.youtube && <a href={links.youtube}>Youtube</a>}</div>
-    <div>{links.linkcore && <a href={links.linkcore}>Streaming</a>}</div>
-  )}
+          <p class="work-meta">
+            {year}{" "}<span>·</span>{" "}{instrumentation}
+          </p>
 
-  <h2>Program Note</h2>
-  <slot />
+          {
+            links ? (
+              <div class="work-links-list">
+                {links.youtube ? (
+                  <a
+                    href={links.youtube}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    YouTube
+                  </a>
+                ) : undefined}
+                {links.linkcore ? (
+                  <a
+                    href={links.linkcore}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Streaming
+                  </a>
+                ) : undefined}
+              </div>
+            ) : undefined
+          }
+        </div>
+      </div>
+
+      <section class="program-note">
+        <h2>Program Note</h2>
+
+        <div class="program-note-content">
+          <slot />
+        </div>
+      </section>
+    </article>
+  </main>
 </BaseLayout>

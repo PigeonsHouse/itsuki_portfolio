@@ -1,4 +1,5 @@
 ---
+import WorkCard from "../components/workCard.astro";
 import BaseLayout from "../layouts/base.astro";
 
 const works: any[] = Object.values(
@@ -9,15 +10,78 @@ const works: any[] = Object.values(
 const sortedWorks = works.sort((a, b) => a.frontmatter.id - b.frontmatter.id);
 ---
 
-<BaseLayout title="Works">
-  <section class="works-section">
-    <h2>Works</h2>
-    {
-      sortedWorks.map((post) => (
-        <div>
-          <a href={post.url}>{post.frontmatter.title}</a>
-        </div>
-      ))
+<style>
+  body {
+    background: #fffbee;
+  }
+
+  main {
+    width: min(1400px, calc(100% - 80px));
+    padding: 80px 0 120px;
+  }
+  .section-header {
+    margin-bottom: 60px;
+  }
+
+  .section-header h2 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 3rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+
+  .works-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 50px 32px;
+  }
+  @media (max-width: 700px) {
+    main {
+      width: calc(100% - 40px);
+      padding: 50px 0 80px;
     }
-  </section>
+
+    .section-header {
+      margin-bottom: 40px;
+    }
+
+    .section-header h2 {
+      font-size: 2.4rem;
+    }
+    .works-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 36px 18px;
+    }
+  }
+  @media (max-width: 420px) {
+    .works-list {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+</style>
+
+<BaseLayout>
+  <main>
+    <section class="works-section">
+      <header class="section-header">
+        <h2>Works</h2>
+      </header>
+      <div class="works-list">
+        {
+          sortedWorks.map((work) => (
+            <WorkCard
+              url={work.url}
+              thumbnail={work.frontmatter.thumbnail}
+              opus={work.frontmatter.opus}
+              title={work.frontmatter.title}
+              year={work.frontmatter.year}
+              instrumentation={work.frontmatter.instrumentation}
+            />
+          ))
+        }
+      </div>
+    </section>
+  </main>
 </BaseLayout>

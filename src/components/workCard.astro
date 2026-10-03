@@ -1,0 +1,127 @@
+---
+const { url, thumbnail, opus, title, year, instrumentation } = Astro.props;
+---
+
+<style>
+  .work-card {
+    min-width: 0;
+  }
+  .work-card-jacket {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    margin-bottom: 20px;
+
+    background: #e5e5e2;
+  }
+  .work-card-info {
+    padding: 0 2px;
+  }
+
+  .work-card-opus {
+    margin: 0 0 7px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    color: #777;
+  }
+
+  .work-card-title {
+    margin: 0 0 10px;
+
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .work-card-year,
+  .work-card-instrumentation {
+    margin: 0;
+
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #777;
+  }
+
+  .work-card-year {
+    display: inline;
+  }
+
+  .work-card-instrumentation {
+    display: inline;
+  }
+
+  .work-card-year::after {
+    content: " · ";
+  }
+
+  @media (max-width: 700px) {
+    .work-card-jacket {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .work-card-title {
+      font-size: 1rem;
+    }
+
+    .work-card-opus,
+    .work-card-year,
+    .work-card-instrumentation {
+      font-size: 0.78rem;
+    }
+  }
+  @media (max-width: 420px) {
+    .work-card-title {
+      font-size: 1.1rem;
+    }
+  }
+  .work-card-jacket-link {
+    display: block;
+  }
+
+  .work-card-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .work-card-jacket-link img {
+    transition: opacity 0.2s ease;
+  }
+
+  .work-card-jacket-link:hover img {
+    opacity: 0.85;
+  }
+
+  .work-card-title a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>
+
+<div class="work-card">
+  <a href={url} class="work-card-jacket-link">
+    <img src={thumbnail} alt={title} class="work-card-jacket" />
+  </a>
+
+  <div class="work-card-info">
+    <p class="work-card-opus">
+      {opus}
+    </p>
+
+    <h2 class="work-card-title">
+      <a href={url}>
+        {title}
+      </a>
+    </h2>
+
+    <p class="work-card-year">
+      {year}
+    </p>
+
+    <p class="work-card-instrumentation">
+      {instrumentation}
+    </p>
+  </div>
+</div>
