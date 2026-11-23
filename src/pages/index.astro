@@ -1,6 +1,7 @@
 ---
 import WorkCard from "../components/workCard.astro";
 import BaseLayout from "../layouts/base.astro";
+import AssetImage from "../components/assetImage.astro";
 
 const works: any[] = Object.values(
   import.meta.glob("./works/*.md", {
@@ -17,7 +18,7 @@ const sortedWorks = works.sort((a, b) => a.frontmatter.id - b.frontmatter.id);
 
   main {
     width: min(1400px, calc(100% - 80px));
-    padding: 80px 0 120px;
+    padding: 64px 0 120px;
   }
   .section-header {
     margin-bottom: 60px;
@@ -29,6 +30,37 @@ const sortedWorks = works.sort((a, b) => a.frontmatter.id - b.frontmatter.id);
     font-size: 3rem;
     font-weight: 400;
     letter-spacing: 0.04em;
+  }
+
+  .about-section {
+    display: flex;
+    gap: 32px;
+    > div {
+      width: 50%;
+    }
+  }
+  .about-image {
+    display: flex;
+    justify-content: flex-end;
+    img {
+      width: 100%;
+      max-width: 520px;
+      aspect-ratio: 1 / 1;
+      background: #e5e5e2;
+    }
+  }
+  p.about-info {
+    font-family: serif;
+    font-size: 18px;
+  }
+
+  @media (max-width: 600px) {
+    .about-section {
+      flex-direction: column-reverse;
+      > div {
+        width: unset;
+      }
+    }
   }
 
   .works-list {
@@ -64,23 +96,38 @@ const sortedWorks = works.sort((a, b) => a.frontmatter.id - b.frontmatter.id);
 
 <BaseLayout>
   <main>
+    <section class="about-section">
+      <div class="about-description">
+        <header class="section-header">
+          <h2>Itsuki Uchida</h2>
+        </header>
+        <p class="about-info">
+          音で、見えない風景を、描く。
+          <br />
+          クラシックの伝統を大切にしながら、
+          <br />
+          現代の感性で新たな音楽のかたちを探求しています。
+        </p>
+      </div>
+      <div class="about-image">
+        <AssetImage alt="topImage" />
+      </div>
+    </section>
     <section class="works-section">
       <header class="section-header">
         <h2>Works</h2>
       </header>
       <div class="works-list">
-        {
-          sortedWorks.map((work) => (
-            <WorkCard
-              url={work.url}
-              thumbnail={work.frontmatter.thumbnail}
-              opus={work.frontmatter.opus}
-              title={work.frontmatter.title}
-              year={work.frontmatter.year}
-              instrumentation={work.frontmatter.instrumentation}
-            />
-          ))
-        }
+        {sortedWorks.map((work) => (
+          <WorkCard
+            url={work.url}
+            thumbnail={work.frontmatter.thumbnail}
+            opus={work.frontmatter.opus}
+            title={work.frontmatter.title}
+            year={work.frontmatter.year}
+            instrumentation={work.frontmatter.instrumentation}
+          />
+        ))}
       </div>
     </section>
   </main>

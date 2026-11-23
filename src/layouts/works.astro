@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import BaseLayout from "./base.astro";
 import AssetImage from "../components/assetImage.astro";
 
@@ -10,7 +9,7 @@ const {
 
 <style>
   body {
-    background: #f8f7f4;
+    background: #fffbee;
   }
   main {
     width: min(1200px, calc(100% - 80px));
@@ -238,8 +237,13 @@ const {
 <BaseLayout title={title}>
   <main>
     <header class="work-header">
-      <a href="../index.html" class="back-link">Works</a>
-      <a class="header-title"> - {opus} {title}</a>
+      <a href="../index.html" class="back-link">
+        Works
+      </a>
+      <a class="header-title">
+        {" "}
+        - {opus} {title}
+      </a>
     </header>
     <article id="work-page">
       <div class="work-main">
@@ -248,42 +252,36 @@ const {
         </div>
 
         <div class="work-info">
-          <p class="work-opus">
-            {opus}
-          </p>
+          <p class="work-opus">{opus}</p>
 
-          <h1 class="work-title">
-            {title}
-          </h1>
+          <h1 class="work-title">{title}</h1>
 
           <p class="work-meta">
-            {year}{" "}<span>·</span>{" "}{instrumentation}
+            {year} <span>·</span> {instrumentation}
           </p>
 
-          {
-            links ? (
-              <div class="work-links-list">
-                {links.youtube ? (
-                  <a
-                    href={links.youtube}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    YouTube
-                  </a>
-                ) : undefined}
-                {links.linkcore ? (
-                  <a
-                    href={links.linkcore}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Streaming
-                  </a>
-                ) : undefined}
-              </div>
-            ) : undefined
-          }
+          {links ? (
+            <div class="work-links-list">
+              {links.youtube ? (
+                <a
+                  href={links.youtube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  YouTube
+                </a>
+              ) : undefined}
+              {links.linkcore ? (
+                <a
+                  href={links.linkcore}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Streaming
+                </a>
+              ) : undefined}
+            </div>
+          ) : undefined}
         </div>
       </div>
 
